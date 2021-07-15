@@ -11,7 +11,7 @@ password: demo </p>
 <p> React, Redux, ES6, Redux thunk, React Router, Axios, the moviedb API
 <p>Backend: </p>
 <p> Node JS, Express JS, MongoDB, Mongoose, Heroku </p>
-<p>
+<p> 
 <p>INSTALL: </P>
 <p> - BACKEND: npm install (in main folder) </p>
 <p> - CLIENT: npm instal ( in frontend folder) </p>
