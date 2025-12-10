@@ -24,11 +24,11 @@ const Profile = () => {
         if(!userInfo) {
             navigate('/login')
         } else {
-            if(!user.name) {
+            if(!user?.name) {
                 dispatch(getUserDetails())
             } else {
-                setName(user.name)
-                setEmail(user.email)
+                setName(user?.name)
+                setEmail(user?.email)
             }
         }
     }, [dispatch, navigate, userInfo, user])
