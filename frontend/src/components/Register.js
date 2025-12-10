@@ -1,27 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import { register } from '../actions/userActions';
 
-const Register = ({location, history}) => {
+const Register = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const dispatch = useDispatch()
-
     const userRegister = useSelector((state) => state.userRegister)
     const { loading, userInfo } = userRegister
 
     useEffect(() => {
         if(userInfo) {
-            history.push('/profile')
+            navigate('/profile')
         }
-    }, [history, userInfo])
+    }, [navigate, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -34,13 +35,14 @@ const Register = ({location, history}) => {
 
     return (
         <div className="registerForm">
-            <h2 className="text-center">Sign Up</h2>
+            <h2 className="loginTittle">Sign Up</h2>
             <Form onSubmit={submitHandler} >
                 <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type='name'
                         placeholder='Enter name'
+                        className='loginInput2'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     ></Form.Control>
@@ -50,6 +52,7 @@ const Register = ({location, history}) => {
                     <Form.Control
                         type='email'
                         placeholder='Enter email'
+                        className='loginInput2'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
@@ -59,6 +62,7 @@ const Register = ({location, history}) => {
                     <Form.Control
                         type='password'
                         placeholder='Enter Password'
+                        className='loginInput2'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
@@ -68,16 +72,15 @@ const Register = ({location, history}) => {
                     <Form.Control
                         type='password'
                         placeholder='Confirm Password'
+                        className='loginInput'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
-
                 <Button type='submit' variant='primary'>
                     Register
                 </Button>
             </Form>
-
             <Row className='py-3'>
                 <Col>
                 Have and Account?{' '}
@@ -86,7 +89,6 @@ const Register = ({location, history}) => {
                 </Link>
                 </Col>
             </Row>
-
         </div>            
     )
 }

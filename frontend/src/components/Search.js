@@ -41,15 +41,15 @@ const Search = () =>  {
             </Col>
           </Row>
 
-            {loading ? <Loader /> : 
+          {loading ? <Loader /> : 
             <Row>
-              {movies.filter(movie => movie.poster_path).map(movie => (
+              {movies?.filter(movie => movie.poster_path).map(movie => (
                 <Col key={movie.id} sm={12} md={6} lg={4} xl={3}>
                   <MovieCard movie={movie} />
                 </Col>
               ))}
             </Row>
-            }
+          }
 
         </div>
     )

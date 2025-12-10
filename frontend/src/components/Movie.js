@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import Loader from './Loader'
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
 import { listMovieDetails, addMovieFavorites, removeMovieFavorites, listMyFavorites } from '../actions/movieActions';
 
-const Movie = ({match, history}) => {
+const Movie = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const { id } = useParams();
 
     let inFavorites;
     let newTitle;
@@ -21,38 +23,28 @@ const Movie = ({match, history}) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
-    useEffect(() => {
-        if(!userInfo) {
-            history.push('/login')
-        }
-    }, [history, userInfo])
-    
-
     useEffect(() => {         
-        dispatch(listMovieDetails(match.params.id))
+        dispatch(listMovieDetails(id))
         dispatch(listMyFavorites())          
-    },[dispatch, match])
-
-
+    },[dispatch])
 
     const addMovie = (mymovie) => {
         const mymovie2 = {
-            id : match.params.id,
+            id,
             poster_path : movie.poster_path
         }
         dispatch(addMovieFavorites(mymovie2))
-        history.push('/favorites')
+        navigate('/favorites')
     }
 
     const removeMovie = (id) => {
         dispatch(removeMovieFavorites(id))
-        history.push('/favorites')
+        navigate('/favorites')
     }
 
-  
     if (loading2 == false ) {
         for (const iterator of favoriteMovies) {
-            if (iterator.id == match.params.id) {
+            if (iterator.id == id) {
                 inFavorites = true
                 break
             } else {
@@ -60,8 +52,6 @@ const Movie = ({match, history}) => {
             } 
         }
     }  
-
-    
 
     return (
         <>
@@ -74,28 +64,30 @@ const Movie = ({match, history}) => {
                             fluid className="movieImage" />
                     </Col>
                     <Col md={6}>
-                        <h3 className="movieDetailTitle">{movie.title}</h3>
-                        <p className="movieDetailDescription">{movie.overview}</p>
-                        <p className="movieDetailDescription">Rating: {movie.vote_average}</p>
-                        <p className="movieDetailDescription">
-                            <a target='_blank' 
-                                href={`https://www.youtube.com/results?search_query=${movie.title}+trailer`}>
-                                Trailer
-                            </a>
-                        </p>
-                        { inFavorites ? 
-                            <Button 
-                            onClick={() => removeMovie(movie.id)}
-                            className="btn btn-primary btn-lg favButton2">
-                            Remove from Favorites
-                            </Button>    
-                        :                    
-                            <Button 
-                            onClick={() => addMovie(movie)}
-                            className="btn btn-primary btn-lg favButton">
-                            Add To Favorites
-                            </Button> 
-                        }
+                        <div className="movieDetailHeader">
+                            <h3 className="movieDetailTitle">{movie.title}</h3>
+                            <p className="movieDetailDescription">{movie.overview}</p>
+                            <p className="movieDetailDescription">Rating: {movie.vote_average}</p>
+                            <p className="movieDetailDescription">
+                                <a target='_blank' 
+                                    href={`https://www.youtube.com/results?search_query=${movie.title}+trailer`}>
+                                    Trailer
+                                </a>
+                            </p>
+                            { inFavorites ? 
+                                <Button 
+                                onClick={() => removeMovie(movie.id)}
+                                className="btn btn-primary btn-lg favButton2">
+                                Remove from Favorites
+                                </Button>    
+                            :                    
+                                <Button 
+                                onClick={() => addMovie(movie)}
+                                className="btn btn-primary btn-lg favButton">
+                                Add To Favorites
+                                </Button> 
+                            }
+                        </div>
                     </Col>
             </Row>
        }

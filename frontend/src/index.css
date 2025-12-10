@@ -25,8 +25,11 @@ code {
 }
 .movieImage {
 	width: 60%;
-	margin-left: 8%;
+	margin-left: 18%;
 	margin-top: 30px;
+}
+.movieDetailHeader {
+	margin-right: 20%;
 }
 .movieDetailDescription {
 	font-size: 20px;
@@ -54,6 +57,20 @@ code {
 	font-size: 28px;
 	width: 40%;
 	margin-left: 30%;
+	margin-top: 30px;
+}
+
+.loginTittle{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.loginInput{
+	margin-bottom: 25px;
+}
+
+.loginInput2{
+	margin-bottom: 15px;
 }
 
 .imageGender {
@@ -62,6 +79,10 @@ code {
 }
 .imageGender2 {
 	margin-top: 20px;
+}
+
+.imageGenderMain{
+	margin-left: 5%;
 }
 
 .genreImages {

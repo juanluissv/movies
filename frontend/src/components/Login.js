@@ -1,25 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useNavigate, Redirect } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import { login } from '../actions/userActions';
 
-const Login = ({location, history}) => {
+const Login = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const dispatch = useDispatch()
 
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, userInfo } = userLogin
 
     useEffect(() => {
         if(userInfo) {
-            history.push('/favorites')
+            navigate('/favorites')
         }
-    }, [history, userInfo])
+    }, [navigate, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -28,13 +29,14 @@ const Login = ({location, history}) => {
 
     return (
     <div className="registerForm">
-        <h2>Sign In</h2>
+        <h2 className='loginTittle '>Sign In</h2>
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
                     <Form.Label>EMAIL: <small>demo@demo.com</small></Form.Label>
                     <Form.Control
                         type='email'
                         placeholder='Enter Email'
+                        className='loginInput'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
@@ -44,6 +46,7 @@ const Login = ({location, history}) => {
                     <Form.Control
                         type='password'
                         placeholder='Enter Password'
+                        className='loginInput'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
@@ -52,7 +55,6 @@ const Login = ({location, history}) => {
                     Sign in
                 </Button>
             </Form>
-
             <Row className='py-3'>
                 <Col>
                     New Customer?{' '}
@@ -61,8 +63,6 @@ const Login = ({location, history}) => {
                     </Link>
                 </Col>
             </Row>
-
-
         </div>
     )
 }

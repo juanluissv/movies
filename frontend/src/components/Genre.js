@@ -19,11 +19,11 @@ const Genre = () => {
 
     return ( 
         <>       
-        <div>
+        <div className='imageGenderMain'>
             <img 
                 src='../images/action.png'
                 onClick={() => getGender('28')}
-                className=""
+                className="imageGender"
             />
             <img 
                 src='../images/animated.png'
@@ -48,7 +48,7 @@ const Genre = () => {
             <img 
                 src='../images/drama.png'
                 onClick={() => getGender('18')}
-                className="imageGender2"
+                className="imageGender"
             />
             <img 
                 src='../images/horror.png'
@@ -74,7 +74,7 @@ const Genre = () => {
 
         {loading ? <Loader /> : 
             <Row className="genreImages">
-                {movies.map(movie => (
+                {movies?.map(movie => (
                     <Col key={movie.id} sm={12} md={6} lg={4} xl={3}>
                         <MovieCard movie={movie} />
                     </Col>

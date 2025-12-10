@@ -11,7 +11,7 @@ const Header = () => {
     const { userInfo } = userLogin
 
     return (
-        <div>
+        <>
         <header>
             <Navbar  expand="lg" collapseOnSelect className="navbar-dark bg-dark nav1">
                 <Container>
@@ -60,7 +60,7 @@ const Header = () => {
                 </Container>
             </Navbar>    
         </header>
-        </div>
+        </>
     )
 }
 

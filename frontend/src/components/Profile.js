@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import { getUserDetails, logout } from '../actions/userActions';
 
 
-const Profile = ({location, history}) => {
+const Profile = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const userDetails = useSelector((state) => state.userDetails)
     const { loading, user } = userDetails
@@ -20,7 +22,7 @@ const Profile = ({location, history}) => {
 
     useEffect(() => {
         if(!userInfo) {
-            history.push('/login')
+            navigate('/login')
         } else {
             if(!user.name) {
                 dispatch(getUserDetails())
@@ -29,15 +31,12 @@ const Profile = ({location, history}) => {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, history, userInfo, user])
-
+    }, [dispatch, navigate, userInfo, user])
 
     const logoutHandler = () => {
         dispatch(logout())
-        history.push('/login')
+        navigate('/login')
     }
-
-    
 
     return (
         <div className="registerForm">
@@ -62,13 +61,10 @@ const Profile = ({location, history}) => {
                     ></Form.Control>
                 </Form.Group>
             </Form>
-
-                <Button type='submit' variant='info' className='logoutButton' onClick={logoutHandler}>
-                    Logout
-                </Button>
-
+            <Button type='submit' variant='info' className='logoutButton' onClick={logoutHandler}>
+                Logout
+            </Button>
         </div>
-
     )
 }
 

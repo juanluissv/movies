@@ -13,7 +13,6 @@ import {
     USER_DETAILS_RESET
 } from '../constants/userConstants';
 
-
 export const login = (email, password) => async(dispatch) => {
     try {
         dispatch({

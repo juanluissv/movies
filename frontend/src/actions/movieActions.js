@@ -22,8 +22,6 @@ import { MOVIES_LIST_FAIL,
 } from '../constants/movieConstants';
 import axios from 'axios';
 
-
-
 export const listMovies = () => async (dispatch) => {
     try {
         dispatch({
@@ -90,7 +88,6 @@ export const searchMovie = (title) => async (dispatch) => {
 }
 
 
-
 export const  addMovieFavorites = (movie) => async(dispatch, getState) => {
 
     try {
@@ -121,7 +118,6 @@ export const  addMovieFavorites = (movie) => async(dispatch, getState) => {
         })
     }
 }
-
 
 
 export const removeMovieFavorites = (id) => async(dispatch, getState) => {
@@ -155,8 +151,6 @@ export const removeMovieFavorites = (id) => async(dispatch, getState) => {
     }
 }
 
-
-
 export const listMyFavorites = () => async(dispatch, getState) => {
     try {
         dispatch({
@@ -185,9 +179,6 @@ export const listMyFavorites = () => async(dispatch, getState) => {
         })
     }
 }
-
-
-
 
 
 export const genderListMovies = (gender) => async (dispatch) => {

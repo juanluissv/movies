@@ -87,8 +87,6 @@ export const searchMovieReducer = (state = { movies: [] }, action) => {
     }
 }
 
-
-
 export const addMovieFavoritesReducer = (state = {}, action) => {
     switch(action.type) {
         case ADD_MOVIE_FAVORITE_REQUEST:
@@ -150,8 +148,6 @@ export const listMyFavoritesReducer = (state = {favoriteMovies:[]}, action) => {
             return state
     }
 } 
-
-
 
 export const GenderListMoviesReducer = (state = { movies: [] }, action) => {
     switch(action.type) {
